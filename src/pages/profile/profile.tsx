@@ -7,10 +7,6 @@ import { updateUserApi } from '@api';
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
   const user = useSelector((store) => store.authentication.data.user);
-  // const user = {
-  //   name: '',
-  //   email: ''
-  // };
 
   const [isSubmit, setIsSubmit] = useState(false);
 
