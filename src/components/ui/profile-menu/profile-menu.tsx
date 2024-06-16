@@ -1,7 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, SyntheticEvent } from 'react';
 import styles from './profile-menu.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ProfileMenuUIProps } from './type';
+import { useDispatch } from '../../../services/store';
+import { logout } from '../../../services/authenticationSlice';
+
 
 export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
   pathname,
@@ -41,4 +44,6 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
         : 'В этом разделе вы можете просмотреть свою историю заказов'}
     </p>
   </>
+  
 );
+
