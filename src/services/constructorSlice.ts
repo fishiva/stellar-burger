@@ -3,7 +3,7 @@ import { TConstructorIngredient, TIngredient } from "@utils-types";
 import { ingredients } from "./indridientsSlice";
 
 
-interface IcostructorSlice { 
+export interface IcostructorSlice { 
     bun: TIngredient | null,
     ingredients: TConstructorIngredient[];
 }
