@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>42/60</span>
+                <span class='fraction'>56/60</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>4/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>42/60</span>
+                <span class='fraction'>56/60</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -148,28 +148,28 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -186,7 +186,7 @@ import { TConstructorIngredient, TIngredient } from "@utils-types";
 import { ingredients } from "./indridientsSlice";
 &nbsp;
 &nbsp;
-interface IcostructorSlice { 
+export interface IcostructorSlice { 
     bun: TIngredient | null,
     ingredients: TConstructorIngredient[];
 }
@@ -206,29 +206,29 @@ const contructorSlice = createSlice({
         },
 &nbsp;
         addIngridients: {
-          reducer: <span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;TConstructorIngredient&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >              state.ingredients.push(action.payload);</span>
+          reducer: (state, action: PayloadAction&lt;TConstructorIngredient&gt;) =&gt; {
+              state.ingredients.push(action.payload);
           },
-          prepare: <span class="fstat-no" title="function not covered" >(ingredients: TIngredient) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                      const key = nanoid();</span>
-<span class="cstat-no" title="statement not covered" >                      return { payload: {...ingredients, id: key } };</span>
-<span class="cstat-no" title="statement not covered" >          }</span>
+          prepare: (ingredients: TIngredient) =&gt; {
+                      const key = nanoid();
+                      return { payload: {...ingredients, id: key } };
+          }
         },
 &nbsp;
-        removeIngridients: <span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;string&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >          state.ingredients = state.ingredients.filter( (ingredient) =&gt; ingredient.id !== action.payload)</span>
+        removeIngridients: (state, action: PayloadAction&lt;string&gt;) =&gt; {
+          state.ingredients = state.ingredients.filter( (ingredient) =&gt; ingredient.id !== action.payload)
         },
 &nbsp;
-        moveIngredients: <span class="fstat-no" title="function not covered" >(</span>
-<span class="cstat-no" title="statement not covered" >          state,</span>
-<span class="cstat-no" title="statement not covered" >          action: PayloadAction&lt;{ index: number; newIndex: number }&gt;</span>
-<span class="cstat-no" title="statement not covered" >        ) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >          const { index, newIndex } = action.payload;</span>
-<span class="cstat-no" title="statement not covered" >          const finalIndex = index + newIndex;</span>
-<span class="cstat-no" title="statement not covered" >          if (finalIndex &gt;= 0 &amp;&amp; finalIndex &lt; state.ingredients.length) {</span>
-<span class="cstat-no" title="statement not covered" >            const a = state.ingredients[index];</span>
-<span class="cstat-no" title="statement not covered" >            state.ingredients[index] = state.ingredients[finalIndex];</span>
-<span class="cstat-no" title="statement not covered" >            state.ingredients[finalIndex] = a;</span>
+        moveIngredients: (
+          state,
+          action: PayloadAction&lt;{ index: number; newIndex: number }&gt;
+        ) =&gt; {
+          const { index, newIndex } = action.payload;
+          const finalIndex = index + newIndex;
+          if (finalIndex &gt;= 0 &amp;&amp; finalIndex &lt; state.ingredients.length) {
+            const a = state.ingredients[index];
+            state.ingredients[index] = state.ingredients[finalIndex];
+            state.ingredients[finalIndex] = a;
         }},
 &nbsp;
         reset: <span class="fstat-no" title="function not covered" >(state) =&gt; {</span>
@@ -247,7 +247,7 @@ export const {setbun, addIngridients,removeIngridients, moveIngredients, reset} 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-16T19:18:26.701Z
+                at 2024-06-20T10:50:21.976Z
             </div>
         <script src="../prettify.js"></script>
         <script>

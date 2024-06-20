@@ -1,14 +1,7 @@
-import { getIngredients }  from "./indridientsSlice";
+import { getIngredients, initialState }  from "./indridientsSlice";
 import ingredientsReducer from './indridientsSlice'
 describe('ingredientsSlice', function() {
-  const initialState = {
-    ingredients: [],
-    loader: false,
-    error: undefined,
-    buns: [],
-    mains: [],
-    sauces: []
-  }
+
   it('обработка запроса getIngredients.pending', function() {
     const state = ingredientsReducer(
     initialState
@@ -60,23 +53,25 @@ describe('ingredientsSlice', function() {
   });
 
 
-  // it('обработка запроса getIngredients.rejected', function() {
-  //   const testError = 'Test Error';
-  //   const state = ingredientsReducer({
-  //   ...initialState,
-  //   loader:true,
-  //   error: testError
-  //   },
-  //   getIngredients.rejected({error:testError},'')
-  // );
+  it('обработка запроса getIngredients.rejected', function() {
+    const testError = new Error('Test Error');
 
-  //   expect(state).toEqual({
-  //     ingredients: [],
-  //     loader: false,
-  //     error: testError,
-  //     buns: [],
-  //     mains: [],
-  //     sauces: []
-  //   });
-  // });
+    const expectedState = {
+      ingredients: [],
+      loader: false,
+      error: testError.message,
+      buns: [],
+      mains: [],
+      sauces: []
+    }
+
+    const state = ingredientsReducer({
+    ...initialState,
+    loader:true,
+    },
+    getIngredients.rejected(testError,'')
+  );
+
+    expect(state).toMatchObject(expectedState);
+  });
 });

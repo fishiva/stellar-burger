@@ -20,7 +20,7 @@ interface Iingredients {
     sauces: TIngredient[]
 }
 
-const initialState: Iingredients = {
+export const initialState: Iingredients = {
     ingredients: [],
     loader: false,
     error: undefined,

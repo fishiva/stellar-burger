@@ -10,6 +10,10 @@ export const registerUser = createAsyncThunk(
   'user/register',
   async(data: TRegisterData) => {
     const res =  await registerUserApi(data);
+    localStorage.setItem('refreshToken', res.refreshToken);
+    localStorage.setItem('name', res.user.name);
+    localStorage.setItem('email', res.user.email);
+    setCookie('accessToken', res.accessToken);
     return res;
   }
 );
@@ -18,6 +22,10 @@ export const loginUser = createAsyncThunk(
   'user/login',
   async(data: TLoginData) => {
     const res = await loginUserApi(data);
+    localStorage.setItem('refreshToken', res.refreshToken);
+    localStorage.setItem('name', res.user.name);
+    localStorage.setItem('email', res.user.email);
+    setCookie('accessToken', res.accessToken);
     return res;
   }
 );
@@ -57,7 +65,7 @@ export const logout = createAsyncThunk(
   }
 );
 
-interface Iauthentication {
+export interface Iauthentication {
   data: TAuthResponse,
   isAuth: boolean,
   error: string | undefined,
@@ -65,7 +73,7 @@ interface Iauthentication {
   isAuthCheckedSelector: boolean
 };
 
-const initialState: Iauthentication = {
+export const initialState: Iauthentication = {
   data: {
     success: false,
     refreshToken: '',
@@ -84,18 +92,13 @@ const authenticationSlice = createSlice({
   reducers: {
     authChecked: (state) => {
       state.isAuthCheckedSelector = true;
-
     }
   },
   extraReducers: (builder) => {
     builder
-      .addCase(registerUser.fulfilled,(state, action: PayloadAction<TAuthResponse>)=> {
+      .addCase(registerUser.fulfilled,(state, action:PayloadAction<TAuthResponse>)=> {
         state.data.user = action.payload.user;
         state.isAuth = true;
-        localStorage.setItem('refreshToken', action.payload.refreshToken);
-        localStorage.setItem('name', action.payload.user.name);
-        localStorage.setItem('email', action.payload.user.email);
-        setCookie('accessToken', action.payload.accessToken);
       })
       
       .addCase(registerUser.rejected,(state, action) => {
@@ -110,17 +113,14 @@ const authenticationSlice = createSlice({
       .addCase(loginUser.fulfilled,(state, action: PayloadAction<TAuthResponse>)=> {
         state.data.user = action.payload.user;
         state.isAuth = true;
+        state.data.success = true
         // state.isLoading = false;
-        localStorage.setItem('refreshToken', action.payload.refreshToken);
-        localStorage.setItem('name', action.payload.user.name);
-        localStorage.setItem('email', action.payload.user.email);
-        setCookie('accessToken', action.payload.accessToken);
       })
 
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.error.message;
         state.data.success = false;
-        // state.isAuth = false;
+        state.isAuth = false;
       })
 
       .addCase(loginUser.pending,(state, action) => {
@@ -129,7 +129,7 @@ const authenticationSlice = createSlice({
       })
 
       .addCase(getUser.fulfilled, ( state, action) => {
-        state.data.user = action.payload.user;
+        state.data.user = action.payload.user
         state.isAuth = true;
         state.isLoading = false;
         state.isAuthCheckedSelector = true
@@ -141,8 +141,9 @@ const authenticationSlice = createSlice({
 
       .addCase(updateUser.fulfilled, ( state, action) => {
         state.data.user = action.payload.user;
-        // state.isAuth = true;
-        // state.isLoading = false;
+        state.isAuth = true;
+        state.isLoading = false;
+        state.isAuthCheckedSelector = true
       })
 
       .addCase(updateUser.rejected, ( state, action) => {

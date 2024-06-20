@@ -43,7 +43,7 @@ interface OrdersInterface {
   orderModalData: null | TOrder
 }
 
-const initialState : OrdersInterface = {
+export const initialState : OrdersInterface = {
   orders: [],
   feed: null,
   feedorders: [],
